@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘의 하늘 | 기상청 단기예보</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="brand">
+          <div class="brand-icon">☀</div>
+          <div>
+            <p class="eyebrow">KOREA WEATHER</p>
+            <h1>오늘의 하늘</h1>
+          </div>
+        </div>
+        <span class="api-badge" id="apiStatus">API 키를 입력해주세요</span>
+      </div>
+
+      <p class="hero-description">
+        기상청 단기예보 데이터를 바탕으로 현재 위치의 날씨와 시간대별 예보를 확인하세요.
+      </p>
+
+      <div class="search-panel">
+        <label class="key-label" for="apiKey">기상청 단기예보 API 키</label>
+        <div class="key-row">
+          <input
+            id="apiKey"
+            type="password"
+            placeholder="발급받은 서비스 키를 붙여넣으세요"
+            autocomplete="off"
+          />
+          <button id="saveKeyBtn" class="button secondary">키 저장</button>
+        </div>
+        <p class="help-text">공공데이터포털에서 발급받은 단기예보 서비스 키를 입력하세요.</p>
+
+        <div class="location-actions">
+          <button id="currentLocationBtn" class="button primary">
+            <span>◎</span> 내 현재 위치 조회
+          </button>
+
+          <label class="select-wrap" for="citySelect">
+            <span class="sr-only">도시 선택</span>
+            <select id="citySelect">
+              <option value="60,127,서울">서울</option>
+              <option value="98,76,부산">부산</option>
+              <option value="89,90,대구">대구</option>
+              <option value="58,74,인천">인천</option>
+              <option value="58,125,광주">광주</option>
+              <option value="68,100,대전">대전</option>
+              <option value="102,84,울산">울산</option>
+              <option value="55,124,수원">수원</option>
+              <option value="73,134,춘천">춘천</option>
+              <option value="52,38,강릉">강릉</option>
+              <option value="54,55,청주">청주</option>
+              <option value="67,100,세종">세종</option>
+              <option value="50,67,전주">전주</option>
+              <option value="91,77,창원">창원</option>
+              <option value="108,77,포항">포항</option>
+              <option value="102,84,울산">울산</option>
+              <option value="144,123,제주">제주</option>
+            </select>
+          </label>
+          <button id="citySearchBtn" class="button outline">선택 도시 조회</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="messageBox" class="message-box info">
+      API 키를 입력한 뒤 <strong>내 현재 위치 조회</strong> 또는 도시 조회를 눌러주세요.
+    </section>
+
+    <section id="weatherSection" class="weather-section hidden">
+      <article class="current-card">
+        <div class="current-top">
+          <div>
+            <p class="location-name" id="locationName">서울</p>
+            <p class="updated-time" id="updatedTime">기상청 예보 기준</p>
+          </div>
+          <button id="refreshBtn" class="refresh-btn" aria-label="날씨 새로고침">↻</button>
+        </div>
+
+        <div class="current-weather">
+          <div class="weather-icon" id="weatherIcon">☀️</div>
+          <div>
+            <div class="temperature"><span id="temperature">--</span><small>°C</small></div>
+            <p class="weather-summary" id="weatherSummary">날씨를 불러오는 중입니다</p>
+          </div>
+        </div>
+
+        <div class="weather-details">
+          <div class="detail-item">
+            <span class="detail-icon">💧</span>
+            <div><small>습도</small><strong id="humidity">--%</strong></div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">☂</span>
+            <div><small>강수확률</small><strong id="rainChance">--%</strong></div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">≋</span>
+            <div><small>풍속</small><strong id="windSpeed">-- m/s</strong></div>
+          </div>
+        </div>
+      </article>
+
+      <section class="forecast-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">HOURLY FORECAST</p>
+            <h2>시간대별 예보</h2>
+          </div>
+          <span id="forecastDateLabel"></span>
+        </div>
+        <div class="forecast-list" id="forecastList"></div>
+      </section>
+
+      <p class="source-note">데이터 제공: 기상청 단기예보 · 실제 관측값과 예보는 차이가 있을 수 있습니다.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
